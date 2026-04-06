@@ -1,0 +1,7 @@
+certifi
+Pillow
+pyserial
+wincertstore
+ttkbootstrap
+matplotlib
+pyinstaller
