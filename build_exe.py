@@ -11,10 +11,9 @@ pyinstaller_args = [
     '--noconsole',                       # Ẩn cửa sổ CMD đen
     '--onefile',                         # Gom tất cả thành 1 file .exe
     '--name=Robotic_Arm_Simulation',     # Tên file exe xuất ra
-    '--add-data=_logo.png;.',            # Nhồi file logo
-    '--add-data=_qr.jpg;.',              # Nhồi file QR
-    '--add-data=_icon.ico;.',            # Nhồi file icon để hiển thị trên thanh tiêu đề
-    '--icon=_icon.ico',                  # Icon cho chính cái file .exe
+
+    '--add-data=img;img',
+    '--icon=img/_icon.ico',              # Icon cho chính cái file .exe
     '--clean'                            # Dọn dẹp cache cũ trước khi build để tránh lỗi
 ]
 
