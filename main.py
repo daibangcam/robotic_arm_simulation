@@ -5,12 +5,13 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.patches import Circle, Wedge
 from PIL import Image, ImageTk
 import os
+import sys
 import H2Q_Lib
 
 class H2Q_RR_Robot_Pro_GUI_Final:
     def __init__(self, root):
         self.root = root
-        self.root.title("H2Q Lab - Mô phỏng hoạt động cánh tay Robot v1")
+        self.root.title("H2Q Lab - Mô phỏng cánh tay Robot v1")
 
         icon_path = H2Q_Lib.H2Q_get_resource_path("_icon.ico")
         if os.path.exists(icon_path):
@@ -37,6 +38,8 @@ class H2Q_RR_Robot_Pro_GUI_Final:
 
         self.H2Q_update_from_sliders()
 
+        self.root.protocol("WM_DELETE_WINDOW", self.H2Q_on_closing)
+
     def H2Q_setup_ui(self):
         self.notebook = ttk.Notebook(self.root)
         self.notebook.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
@@ -44,7 +47,7 @@ class H2Q_RR_Robot_Pro_GUI_Final:
         self.tab_sim = ttk.Frame(self.notebook)
         self.tab_info = ttk.Frame(self.notebook)
 
-        self.notebook.add(self.tab_sim, text="Mô phỏng")
+        self.notebook.add(self.tab_sim, text="RR")
         self.notebook.add(self.tab_info, text="Thông tin")
 
         self.H2Q_build_tab_sim()
@@ -133,9 +136,10 @@ class H2Q_RR_Robot_Pro_GUI_Final:
             pass
 
         tk.Label(center_text_frame, text="Trần Hoàn", font=("Segoe UI", 36, "bold"), fg="#2c3e50").pack(pady=(0, 15))
-        tk.Label(center_text_frame, text="Điện thoại: 0978.39.41.43", font=("Segoe UI", 16), fg="#34495e").pack(pady=5)
-        tk.Label(center_text_frame, text="For more information, please scan QR", font=("Segoe UI", 14, "italic"),
-                 fg="#7f8c8d").pack(pady=(5, 0))
+        tk.Label(center_text_frame, text="Điện thoại: 0978.39.41.43 (Telegram/Whatsapp)", font=("Segoe UI", 16), fg="#34495e").pack(pady=5)
+        tk.Label(center_text_frame, text="Website: hano.cf", font=("Segoe UI", 16), fg="#34495e").pack(pady=5)
+        tk.Label(center_text_frame, text="Homepage: hoantran205.notion.site", font=("Segoe UI", 16), fg="#34495e").pack(pady=5)
+        tk.Label(center_text_frame, text="Muốn biết nhiều hơn thì quét mã QR kế bên này nha :3", font=("Segoe UI", 14, "italic"), fg="#7f8c8d").pack(pady=(15, 0))
 
         qr_filename = H2Q_Lib.H2Q_get_resource_path("_qr.jpg")
         try:
@@ -220,6 +224,11 @@ class H2Q_RR_Robot_Pro_GUI_Final:
             pass
         finally:
             self.updating = False
+
+    def H2Q_on_closing(self):
+        self.root.quit()
+        self.root.destroy()
+        sys.exit(0)
 
 if __name__ == '__main__':
     import ctypes
