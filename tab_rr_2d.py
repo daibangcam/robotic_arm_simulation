@@ -6,7 +6,7 @@ from matplotlib.patches import Circle, Wedge
 import H2Q_Lib
 
 
-class TabRR(ttk.Frame):
+class TabRR2D(ttk.Frame):
     def __init__(self, parent, vcmd, left_width):
         super().__init__(parent)
         self.vcmd, self.LEFT_WIDTH = vcmd, left_width
@@ -42,10 +42,9 @@ class TabRR(ttk.Frame):
         canvas.create_window((0, 0), window=control_frame, anchor="nw")
         canvas.configure(yscrollcommand=scrollbar.set)
 
-        # ---> SỬA LỖI LĂN CHUỘT: Cho phép dùng chung (add="+") và kiểm tra Tab đang mở <---
         def _on_mousewheel(e):
             try:
-                if not canvas.winfo_ismapped(): return # Bỏ qua nếu tab không hiển thị
+                if not canvas.winfo_ismapped(): return
                 cx = canvas.winfo_rootx()
                 cy = canvas.winfo_rooty()
                 cw = canvas.winfo_width()
@@ -62,18 +61,18 @@ class TabRR(ttk.Frame):
         lf1 = ttk.LabelFrame(control_frame, text="Kích thước cánh tay Robot", padding="5")
         lf1.pack(fill=tk.X, pady=3)
         ttk.Label(lf1, text="Link 1 (cm):").grid(row=0, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf1, textvariable=self.l1_var, width=10).grid(row=0, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf1, textvariable=self.l1_var, width=10, validate="key", validatecommand=self.vcmd).grid(row=0, column=1, pady=2, sticky=tk.W)
         ttk.Label(lf1, text="Link 2 (cm):").grid(row=1, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf1, textvariable=self.l2_var, width=10).grid(row=1, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf1, textvariable=self.l2_var, width=10, validate="key", validatecommand=self.vcmd).grid(row=1, column=1, pady=2, sticky=tk.W)
 
         lf_limit = ttk.LabelFrame(control_frame, text="Giới hạn khớp", padding="5")
         lf_limit.pack(fill=tk.X, pady=3)
         ttk.Label(lf_limit, text="T1 Min/Max (độ):").grid(row=0, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf_limit, textvariable=self.t1_min_var, width=6).grid(row=0, column=1, pady=2, padx=(0, 5), sticky=tk.W)
-        ttk.Entry(lf_limit, textvariable=self.t1_max_var, width=6).grid(row=0, column=2, pady=2, sticky=tk.W)
+        ttk.Entry(lf_limit, textvariable=self.t1_min_var, width=6, validate="key", validatecommand=self.vcmd).grid(row=0, column=1, pady=2, padx=(0, 5), sticky=tk.W)
+        ttk.Entry(lf_limit, textvariable=self.t1_max_var, width=6, validate="key", validatecommand=self.vcmd).grid(row=0, column=2, pady=2, sticky=tk.W)
         ttk.Label(lf_limit, text="T2 Min/Max (độ):").grid(row=1, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf_limit, textvariable=self.t2_min_var, width=6).grid(row=1, column=1, pady=2, padx=(0, 5), sticky=tk.W)
-        ttk.Entry(lf_limit, textvariable=self.t2_max_var, width=6).grid(row=1, column=2, pady=2, sticky=tk.W)
+        ttk.Entry(lf_limit, textvariable=self.t2_min_var, width=6, validate="key", validatecommand=self.vcmd).grid(row=1, column=1, pady=2, padx=(0, 5), sticky=tk.W)
+        ttk.Entry(lf_limit, textvariable=self.t2_max_var, width=6, validate="key", validatecommand=self.vcmd).grid(row=1, column=2, pady=2, sticky=tk.W)
 
         lf2 = ttk.LabelFrame(control_frame, text="Động học thuận", padding="5")
         lf2.pack(fill=tk.X, pady=3)
@@ -87,9 +86,9 @@ class TabRR(ttk.Frame):
         lf3 = ttk.LabelFrame(control_frame, text="Động học nghịch", padding="5")
         lf3.pack(fill=tk.X, pady=3)
         ttk.Label(lf3, text="Tọa độ X (cm):").grid(row=0, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf3, textvariable=self.x_var, width=12).grid(row=0, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf3, textvariable=self.x_var, width=12, validate="key", validatecommand=self.vcmd).grid(row=0, column=1, pady=2, sticky=tk.W)
         ttk.Label(lf3, text="Tọa độ Y (cm):").grid(row=1, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf3, textvariable=self.y_var, width=12).grid(row=1, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf3, textvariable=self.y_var, width=12, validate="key", validatecommand=self.vcmd).grid(row=1, column=1, pady=2, sticky=tk.W)
 
         lf4 = ttk.LabelFrame(control_frame, text="Chú thích", padding="5")
         lf4.pack(fill=tk.X, pady=3)

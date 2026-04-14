@@ -7,14 +7,14 @@ print("=======================================")
 
 # Khai báo các tham số
 pyinstaller_args = [
-    'main.py',                           # File code chính
-    '--noconsole',                       # Ẩn cửa sổ CMD đen
-    '--onefile',                         # Gom tất cả thành 1 file .exe
-    '--name=Robotic_Arm_Simulation',     # Tên file exe xuất ra
+    'main.py',                                  # File code chính
+    '--noconsole',                              # Ẩn cửa sổ CMD đen
+    '--onefile',                                # Gom tất cả thành 1 file .exe
+    '--name=Robotic_Arm_Simulation_v2.6',       # Tên file exe xuất ra
 
     '--add-data=img;img',
-    '--icon=img/_icon.ico',              # Icon cho chính cái file .exe
-    '--clean'                            # Dọn dẹp cache cũ trước khi build để tránh lỗi
+    '--icon=img/_icon.ico',                     # Icon cho chính cái file .exe
+    '--clean'                                   # Dọn dẹp cache cũ trước khi build để tránh lỗi
 ]
 
 # Thực thi PyInstaller

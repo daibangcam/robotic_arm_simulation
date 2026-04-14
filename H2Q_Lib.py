@@ -8,7 +8,7 @@ def H2Q_get_resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 # ==========================================
-# ROBOT RR (2 BẬC 2D)
+# ROBOT RR (2 BẬC MẶT PHẲNG 2D)
 # ==========================================
 def H2Q_RR_Forward_Kinematics(L1, L2, th1_deg, th2_deg):
     th1, th2 = math.radians(th1_deg), math.radians(th2_deg)
@@ -26,6 +26,40 @@ def H2Q_RR_Inverse_Kinematics(L1, L2, x, y):
         th1 = math.atan2(y, x) - math.atan2(k2, k1)
         return math.degrees(th1), math.degrees(th2)
     return None, None
+
+# ==========================================
+# ROBOT RR-3D (2 BẬC KHÔNG GIAN)
+# ==========================================
+def H2Q_RR_3D_Forward_Kinematics(L1, L2, th1_deg, th2_deg):
+    th1, th2 = math.radians(th1_deg), math.radians(th2_deg)
+    # Tọa độ các điểm khớp
+    x0, y0, z0 = 0, 0, 0
+    x1, y1, z1 = 0, 0, L1
+
+    r2 = L2 * math.cos(th2)
+    x2 = r2 * math.cos(th1)
+    y2 = r2 * math.sin(th1)
+    z2 = L1 + L2 * math.sin(th2)
+
+    return (x0, y0, z0), (x1, y1, z1), (x2, y2, z2)
+
+def H2Q_RR_3D_Inverse_Kinematics(L1, L2, x, y, z):
+    # Tính Theta 1
+    th1 = math.atan2(y, x)
+
+    # Kiểm tra xem điểm có nằm trên mặt cầu bán kính L2 tâm (0,0,L1) không
+    r = math.sqrt(x ** 2 + y ** 2)
+    z_rel = z - L1
+    dist_sq = r ** 2 + z_rel ** 2
+
+    # Cho phép sai số nhỏ do làm tròn
+    if abs(math.sqrt(dist_sq) - L2) > 0.01:
+        return None, None
+
+    # Tính Theta 2
+    th2 = math.atan2(z_rel, r)
+
+    return math.degrees(th1), math.degrees(th2)
 
 # ==========================================
 # ROBOT RRR (3 BẬC MẶT PHẲNG 2D)

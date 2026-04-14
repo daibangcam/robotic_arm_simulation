@@ -5,10 +5,12 @@ import sys
 import ctypes
 import H2Q_Lib
 
-from tab_rr import TabRR
+from tab_info import TabInfo
+from tab_rr_2d import TabRR2D
+from tab_rr_3d import TabRR3D
 from tab_rrr_2d import TabRRR2D
 from tab_rrr_3d import TabRRR3D
-from tab_info import TabInfo
+
 
 
 class H2Q_Multi_Robot_GUI_Final:
@@ -31,12 +33,14 @@ class H2Q_Multi_Robot_GUI_Final:
         self.notebook = ttk.Notebook(self.root)
         self.notebook.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
-        self.tab_rr = TabRR(self.notebook, self.vcmd, self.LEFT_WIDTH)
+        self.tab_rr_2d = TabRR2D(self.notebook, self.vcmd, self.LEFT_WIDTH)
+        self.tab_rr_3d = TabRR3D(self.notebook, self.vcmd, self.LEFT_WIDTH)
         self.tab_rrr_2d = TabRRR2D(self.notebook, self.vcmd, self.LEFT_WIDTH)
         self.tab_rrr_3d = TabRRR3D(self.notebook, self.vcmd, self.LEFT_WIDTH)
         self.tab_info = TabInfo(self.notebook)
 
-        self.notebook.add(self.tab_rr, text="RR")
+        self.notebook.add(self.tab_rr_2d, text="RR (2D)")
+        self.notebook.add(self.tab_rr_3d, text="RR (3D)")
         self.notebook.add(self.tab_rrr_2d, text="RRR (2D)")
         self.notebook.add(self.tab_rrr_3d, text="RRR (3D)")
         self.notebook.add(self.tab_info, text="Thông tin")

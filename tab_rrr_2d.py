@@ -6,14 +6,12 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.patches import Circle, Wedge
 import H2Q_Lib
 
-
 class TabRRR2D(ttk.Frame):
     def __init__(self, parent, vcmd, left_width):
         super().__init__(parent)
         self.vcmd = vcmd;
         self.LEFT_WIDTH = left_width
-        self.l1_var, self.l2_var, self.l3_var = tk.StringVar(value="10.0"), tk.StringVar(value="8.0"), tk.StringVar(
-            value="5.0")
+        self.l1_var, self.l2_var, self.l3_var = tk.StringVar(value="10.0"), tk.StringVar(value="8.0"), tk.StringVar(value="5.0")
         self.t1_min_var, self.t1_max_var = tk.StringVar(value="-180"), tk.StringVar(value="180")
         self.t2_min_var, self.t2_max_var = tk.StringVar(value="-180"), tk.StringVar(value="180")
         self.t3_min_var, self.t3_max_var = tk.StringVar(value="-180"), tk.StringVar(value="180")
@@ -27,8 +25,7 @@ class TabRRR2D(ttk.Frame):
         self.phi_var.trace_add("write", lambda *args: self.update_from_coords())
         for var in [self.l1_var, self.l2_var, self.l3_var]:
             var.trace_add("write", lambda *args: self.update_from_sliders())
-        for var in [self.t1_min_var, self.t1_max_var, self.t2_min_var, self.t2_max_var, self.t3_min_var,
-                    self.t3_max_var]:
+        for var in [self.t1_min_var, self.t1_max_var, self.t2_min_var, self.t2_max_var, self.t3_min_var, self.t3_max_var]:
             var.trace_add("write", lambda *args: self.update_scale_limits())
 
         self.update_scale_limits()
@@ -50,7 +47,6 @@ class TabRRR2D(ttk.Frame):
         canvas.create_window((0, 0), window=control_frame, anchor="nw")
         canvas.configure(yscrollcommand=scrollbar.set)
 
-        # ---> SỬA LỖI LĂN CHUỘT <---
         def _on_mousewheel(e):
             try:
                 if not canvas.winfo_ismapped(): return
@@ -71,43 +67,39 @@ class TabRRR2D(ttk.Frame):
         lf1 = ttk.LabelFrame(control_frame, text="Kích thước cánh tay Robot", padding="5")
         lf1.pack(fill=tk.X, pady=3)
         ttk.Label(lf1, text="Link 1 (cm):").grid(row=0, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf1, textvariable=self.l1_var, width=10).grid(row=0, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf1, textvariable=self.l1_var, width=10, validate="key", validatecommand=self.vcmd).grid(row=0, column=1, pady=2, sticky=tk.W)
         ttk.Label(lf1, text="Link 2 (cm):").grid(row=1, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf1, textvariable=self.l2_var, width=10).grid(row=1, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf1, textvariable=self.l2_var, width=10, validate="key", validatecommand=self.vcmd).grid(row=1, column=1, pady=2, sticky=tk.W)
         ttk.Label(lf1, text="Link 3 (cm):").grid(row=2, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf1, textvariable=self.l3_var, width=10).grid(row=2, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf1, textvariable=self.l3_var, width=10, validate="key", validatecommand=self.vcmd).grid(row=2, column=1, pady=2, sticky=tk.W)
 
         lf_limit = ttk.LabelFrame(control_frame, text="Giới hạn khớp", padding="5")
         lf_limit.pack(fill=tk.X, pady=3)
-        for i, (min_v, max_v) in enumerate([(self.t1_min_var, self.t1_max_var), (self.t2_min_var, self.t2_max_var),
-                                            (self.t3_min_var, self.t3_max_var)]):
+        for i, (min_v, max_v) in enumerate([(self.t1_min_var, self.t1_max_var), (self.t2_min_var, self.t2_max_var), (self.t3_min_var, self.t3_max_var)]):
             ttk.Label(lf_limit, text=f"T{i + 1} Min/Max (độ):").grid(row=i, column=0, sticky=tk.W, padx=(0, 15))
-            ttk.Entry(lf_limit, textvariable=min_v, width=6).grid(row=i, column=1, pady=2, padx=(0, 5), sticky=tk.W)
-            ttk.Entry(lf_limit, textvariable=max_v, width=6).grid(row=i, column=2, pady=2, sticky=tk.W)
+            ttk.Entry(lf_limit, textvariable=min_v, width=6, validate="key", validatecommand=self.vcmd).grid(row=i, column=1, pady=2, padx=(0, 5), sticky=tk.W)
+            ttk.Entry(lf_limit, textvariable=max_v, width=6, validate="key", validatecommand=self.vcmd).grid(row=i, column=2, pady=2, sticky=tk.W)
 
         lf2 = ttk.LabelFrame(control_frame, text="Động học thuận", padding="5")
         lf2.pack(fill=tk.X, pady=3)
         ttk.Label(lf2, text="Theta 1 (độ):").pack(anchor=tk.W)
-        self.s1 = tk.Scale(lf2, from_=-180, to=180, orient=tk.HORIZONTAL, variable=self.t1_var,
-                           command=lambda e: self.update_from_sliders(), troughcolor='greenyellow')
+        self.s1 = tk.Scale(lf2, from_=-180, to=180, orient=tk.HORIZONTAL, variable=self.t1_var, command=lambda e: self.update_from_sliders(), troughcolor='greenyellow')
         self.s1.pack(fill=tk.X)
         ttk.Label(lf2, text="Theta 2 (độ):").pack(anchor=tk.W)
-        self.s2 = tk.Scale(lf2, from_=-180, to=180, orient=tk.HORIZONTAL, variable=self.t2_var,
-                           command=lambda e: self.update_from_sliders(), troughcolor='greenyellow')
+        self.s2 = tk.Scale(lf2, from_=-180, to=180, orient=tk.HORIZONTAL, variable=self.t2_var, command=lambda e: self.update_from_sliders(), troughcolor='greenyellow')
         self.s2.pack(fill=tk.X)
         ttk.Label(lf2, text="Theta 3 (độ):").pack(anchor=tk.W)
-        self.s3 = tk.Scale(lf2, from_=-180, to=180, orient=tk.HORIZONTAL, variable=self.t3_var,
-                           command=lambda e: self.update_from_sliders(), troughcolor='greenyellow')
+        self.s3 = tk.Scale(lf2, from_=-180, to=180, orient=tk.HORIZONTAL, variable=self.t3_var, command=lambda e: self.update_from_sliders(), troughcolor='greenyellow')
         self.s3.pack(fill=tk.X)
 
         lf3 = ttk.LabelFrame(control_frame, text="Động học nghịch", padding="5")
         lf3.pack(fill=tk.X, pady=3)
         ttk.Label(lf3, text="Tọa độ X (cm):").grid(row=0, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf3, textvariable=self.x_var, width=12).grid(row=0, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf3, textvariable=self.x_var, width=12, validate="key", validatecommand=self.vcmd).grid(row=0, column=1, pady=2, sticky=tk.W)
         ttk.Label(lf3, text="Tọa độ Y (cm):").grid(row=1, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf3, textvariable=self.y_var, width=12).grid(row=1, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf3, textvariable=self.y_var, width=12, validate="key", validatecommand=self.vcmd).grid(row=1, column=1, pady=2, sticky=tk.W)
         ttk.Label(lf3, text="Góc Phi (độ):").grid(row=2, column=0, sticky=tk.W, padx=(0, 15))
-        ttk.Entry(lf3, textvariable=self.phi_var, width=12).grid(row=2, column=1, pady=2, sticky=tk.W)
+        ttk.Entry(lf3, textvariable=self.phi_var, width=12, validate="key", validatecommand=self.vcmd).grid(row=2, column=1, pady=2, sticky=tk.W)
 
         lf4 = ttk.LabelFrame(control_frame, text="Chú thích", padding="5")
         lf4.pack(fill=tk.X, pady=3)
@@ -119,14 +111,12 @@ class TabRRR2D(ttk.Frame):
         self.lbl_link3.pack(fill=tk.X)
         tk.Label(lf4, text="● Gốc tọa độ", fg="green", font=("Segoe UI", 12, "bold"), anchor="w").pack(fill=tk.X)
         tk.Label(lf4, text="★ Đầu công tác", fg="#DAA520", font=("Segoe UI", 12, "bold"), anchor="w").pack(fill=tk.X)
-        tk.Label(lf4, text="○ Vùng làm việc", fg="darkorange", font=("Segoe UI", 12, "bold"), anchor="w").pack(
-            fill=tk.X)
+        tk.Label(lf4, text="○ Vùng làm việc", fg="darkorange", font=("Segoe UI", 12, "bold"), anchor="w").pack(fill=tk.X)
 
         lf5 = ttk.LabelFrame(control_frame, text="Mô tả cánh tay Robot", padding="5")
         lf5.pack(fill=tk.X, pady=3)
-        desc_rrr1 = "Cánh tay RRR 3 bậc phẳng (Planar 3-DOF). Ứng dụng: Gắp nhả (Pick-and-Place)."
-        ttk.Label(lf5, text=desc_rrr1, style="Desc.TLabel", justify=tk.LEFT, wraplength=self.LEFT_WIDTH - 40).pack(
-            fill=tk.X)
+        desc_rrr1 = "Cánh tay RRR 3 bậc phẳng (Planar 3-DOF). Ứng dụng: gắp nhả (Pick-and-Place)."
+        ttk.Label(lf5, text=desc_rrr1, style="Desc.TLabel", justify=tk.LEFT, wraplength=self.LEFT_WIDTH - 40).pack(fill=tk.X)
 
         self.fig, self.ax = plt.subplots(figsize=(9, 8))
         self.fig.subplots_adjust(left=0.08, right=0.95, top=0.95, bottom=0.08)
