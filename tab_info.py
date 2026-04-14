@@ -68,12 +68,13 @@ class TabInfo(ttk.Frame):
 
         # Nội dung cột trái
         changelog_col1 = (
-            "• v1 - mô phỏng cánh tay robot RR 2 bậc tự do (Planar 2-DOF).\n\n"
-            "• v2 - mô phỏng cánh tay RRR 3 bậc phẳng (Planar 3-DOF).\n\n"
-            "• v2.1 - mô phỏng cánh tay RRR không gian (Spatial 3-DOF)."
-            "• v2.2 - đánh dấu vùng không gian làm việc của cánh tay RRR.\n\n"
-            "• v2.3 - bổ sung chú thích từng loại cánh tay robot.\n\n"
-            "• v2.4 - tách riêng Style CSS và code, điều chỉnh UI 2 cột trực quan."
+            "• v1 - mô phỏng cánh tay robot RR 2 bậc tự do (Planar 2-DOF)\n\n"
+            "• v2 - mô phỏng cánh tay RRR 3 bậc phẳng (Planar 3-DOF)\n\n"
+            "• v2.1 - mô phỏng cánh tay RRR không gian (Spatial 3-DOF)\n\n"
+            "• v2.2 - đánh dấu vùng không gian làm việc của cánh tay RRR\n\n"
+            "• v2.3 - bổ sung chú thích từng loại cánh tay robot\n\n"
+            "• v2.4 - tách riêng Style CSS và code, điều chỉnh UI\n\n"
+            "• v2.5 - bổ sung chỉnh giới hạn các khớp quay giống thực tế\n\n"
         )
 
         # Nội dung cột phải
