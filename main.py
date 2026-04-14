@@ -15,7 +15,7 @@ import H2Q_Lib
 class H2Q_Multi_Robot_GUI_Final:
     def __init__(self, root):
         self.root = root
-        self.root.title("H2Q Lab - Mô phỏng cánh tay Robot v2.2")
+        self.root.title("H2Q Lab - Mô phỏng cánh tay Robot v2.3")
 
         icon_path = H2Q_Lib.H2Q_get_resource_path("img/_icon.ico")
         if os.path.exists(icon_path):
