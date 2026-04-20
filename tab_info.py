@@ -99,14 +99,14 @@ class TabInfo(ttk.Frame):
 
         # Change Log
         changelog_text = (
-            "• v1 - mô phỏng cánh tay robot RR 2 bậc phẳng (Planar 2-DOF)\n\n"
-            "• v2 - mô phỏng cánh tay RRR 3 bậc phẳng (Planar 3-DOF)\n\n"
-            "• v2.1 - mô phỏng cánh tay RRR không gian (Spatial 3-DOF)\n\n"
-            "• v2.2 - đánh dấu vùng không gian làm việc của cánh tay RRR\n\n"
-            "• v2.3 - bổ sung chú thích từng loại cánh tay robot\n\n"
-            "• v2.4 - tách riêng Style CSS và code, điều chỉnh UI\n\n"
+            "• v2.6 - tách riêng style CSS và code, tinh chỉnh UI\n\n"
             "• v2.5 - bổ sung chỉnh giới hạn các khớp quay giống thực tế\n\n"
-            "• v2.6 - mô phỏng cánh tay RR không gian (Spatial 2-DOF)\n\n"
+            "• v2.4 - mô phỏng cánh tay RR không gian (Spatial 2-DOF)\n\n"
+            "• v2.3 - bổ sung chú thích từng loại cánh tay robot\n\n"
+            "• v2.2 - đánh dấu vùng không gian làm việc của cánh tay RRR\n\n"
+            "• v2.1 - mô phỏng cánh tay RRR không gian (Spatial 3-DOF)\n\n"
+            "• v2 - mô phỏng cánh tay RRR 3 bậc phẳng (Planar 3-DOF)\n\n"
+            "• v1 - mô phỏng cánh tay robot RR 2 bậc phẳng (Planar 2-DOF)\n\n"
         )
 
         # Gắn text vào khung chứa
