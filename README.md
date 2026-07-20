@@ -5,6 +5,7 @@
 - Hy vọng các bạn sinh viên sẽ dễ hiểu bài và có nhiều đam mê hơn trong ngành học khô khan này.
 
 ## Notes
+- python version 3.10
 - create_ico.py: tạo file .ico để làm icon cho phần mềm
 - build_exe.py: đóng gói chương trình thành file .exe để chạy độc lập
 - main.py: chương trình chính
